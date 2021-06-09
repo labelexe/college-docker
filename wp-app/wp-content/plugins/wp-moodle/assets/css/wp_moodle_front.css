@@ -1,0 +1,12 @@
+.wp_moodle_clear_fix{
+clear: both;
+}
+.wp_moodle_course_2{
+float: left;
+width: 33%;
+min-height: 120px;
+}
+h3.wp_moodle_course_title {
+    padding-right: 10px;
+    font-size: 18px !important;
+}

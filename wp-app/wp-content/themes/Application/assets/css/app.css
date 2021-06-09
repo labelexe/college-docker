@@ -1,0 +1,275 @@
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap&subset=cyrillic);html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+html {
+  background: #fff;
+  color: #111;
+}
+
+a {
+  color: #111;
+  text-decoration: none;
+}
+
+code {
+  background: aqua;
+  color: black;
+}
+
+@-webkit-keyframes InSideMenu {
+  0% {
+    opacity: 0;
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(-800px, 0, 0);
+  }
+
+  90% {
+
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+@-webkit-keyframes InTheDark {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  25% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#app {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  #app {
+    padding: 0 25px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  #app {
+    padding: 0 50px;
+  }
+}
+
+.header .header__wrap .header__wrap_nav {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  flex-flow: row wrap;
+  gap: 35px;
+  justify-content: space-between;
+}
+
+.header .header__wrap .header__wrap_nav .link {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
+  margin: 0;
+}
+
+.header .header__wrap .header__wrap_nav .link ul {
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.header .header__wrap .header__wrap_nav .link ul li:focus
+ul.sub-menu {
+  visibility: visible;
+  transition-delay: 0s;
+  /* react immediately on hover */
+}
+
+.header .header__wrap .header__wrap_nav .link ul li:hover
+ul.sub-menu {
+  transition-delay: 0s;
+  /* react immediately on hover */
+  visibility: visible;
+}
+
+.header .header__wrap .header__wrap_nav .link ul li ul:hover,
+.header .header__wrap .header__wrap_nav .link ul li ul:focus {
+  visibility: visible;
+}
+
+.header .header__wrap .header__wrap_nav .link ul li ul.sub-menu {
+  transition: 0.1s 1s;
+  /* delay of 1 seconds on hover off */
+  visibility: hidden;
+  display: flex;
+  position: absolute;
+  width: 320px;
+  z-index: 100;
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 6px;
+  gap: 20px 0;
+  flex-flow: column;
+  border: solid 1px #eee;
+  margin-top: 25px;
+  overflow-y: auto;
+  max-height: 300px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.header .header__wrap .header__wrap_nav .profile {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.VueCarousel-slide {
+  position: relative;
+}
+
+.VueCarousel-pagination {
+  padding: 0;
+  right: 15px;
+  text-align: end;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.VueCarousel-dot-container {
+  display: flex !important;
+  flex-flow: column !important;
+  margin: 0 !important;
+}
+
+.VueCarousel-dot-container .VueCarousel-dot {
+  margin: 0 !important;
+}
+
+figure.wp-block-table {
+  margin: 25px 0;
+  padding: 0;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #e5ebf5;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  text-align: center;
+  word-break: break-word;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 15px 20px;
+  margin: 25px 0;
+  /* word-break: break-all !important; */
+  text-align: left;
+  border-left: solid #2163d3;
+}
+
+table th {
+  font-size: .80em;
+  letter-spacing: .1em;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+

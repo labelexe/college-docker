@@ -1,0 +1,92 @@
+version: '3.1'
+services:
+  mariadb:
+    # restart: always
+    image: mariadb
+    container_name: collage-mariadb
+    working_dir: /application
+    volumes:
+      - .:/application
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_ROOT_PASSWORD}
+    ports:
+      - '1028:3306'
+    networks:
+      - app-network
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - app-network
+ 
+          #
+  webserver:
+    image: nginx:latest
+    container_name: collage-webserver
+    working_dir: /application
+    volumes:
+      - ./wp-app:/application
+      - ./phpdocker/nginx:/etc/nginx/conf.d
+    ports:
+        - "80:80"
+        - "443:433"
+    networks:
+        - app-network
+      
+  wpapp:
+    image: wordpress:fpm # https://hub.docker.com/_/wordpress/
+    ports:
+      # - 80:80 # change ip if required
+      - "9000:9000"
+    volumes:
+          # - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+      - ./wp-app:/application # Full wordpress project
+          #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
+          #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_NAME: ${DB_DATABASE}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_ROOT_PASSWORD}
+      WORDPRESS_DEBUG: 1
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    networks:
+      - app-network
+
+  wpcli:
+    image: wordpress:cli
+    volumes:
+      - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+      - ./wp-app:/application
+    depends_on:
+      - mariadb
+      - wpapp
+    networks:
+      - app-network
+
+
+
+  # ngrok:
+  #     image: 'shkoliar/ngrok:latest'
+  #     ports:
+  #       - '4551:4551'
+  #     links:
+  #       - webserver
+  #     environment:
+  #       - DOMAIN=webserver
+  #       - PORT=80
+  #     networks:
+  #       - app-network
+     
+networks:
+  app-network:
+    driver: bridge
