@@ -28,10 +28,10 @@
 			<?php 
 			if ( is_single() ) {
 				if ( siteorigin_page_setting( 'page_title' ) ) {
-					the_title( '<h1 class="entry-title">', '</h1>' );
+					the_title( '<h1 class="entry-title" itemprop="name">', '</h1>' );
 				}
 			} else {
-				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+				the_title( '<h2 class="entry-title" itemprop="name"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 			} ?>
 
 			<?php if ( 'post' === get_post_type() ) : ?>
